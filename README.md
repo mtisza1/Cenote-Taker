@@ -46,4 +46,4 @@ _-given_linear or -given_circular options_
 (12) Generates properly formatted .fsa and .tbl files in a separate directory
 (13) Uses tbl2asn to make gbf, val, and sqn files  
 
- Review all files and make any necessary changes before submitting to GenBank ([](https://www.ncbi.nlm.nih.gov/books/NBK53709/)). You will submit the .sqn file. Changes made to .gbf files will NOT be reflected on the .sqn file, unfortunately. However, the .gbf file should be looked at in a sequence map viewer such as MacVector, Geneious, or Ugene (free to use).
+ Review all files and make any necessary changes before submitting to GenBank ([(https://www.ncbi.nlm.nih.gov/books/NBK53709/)]). You will submit the .sqn file. Changes made to .gbf files will NOT be reflected on the .sqn file, unfortunately. However, the .gbf file should be looked at in a sequence map viewer such as MacVector, Geneious, or Ugene (free to use).
