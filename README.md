@@ -16,7 +16,14 @@ GenBank requires that genome submissions include metadata about each genome. The
  
 
 ### _Cenote-Taker's processes_
-
+Note that 11 (or 12 if using '-keep_known') options are required. They must all be there and in the correct order specified here, separated by a space.
+(1)main mode [-default,-given_circular,-given_linear,-needs_rotation] (2) contigs in fasta format (3) run title [one word less than 20 characters! underscores are OK] (4) isolation source/animal (5) collection date [eg 01-Jun-2016] (6) metagenome type (7) SRR number (8) SRX number (9) Biosample number (10) Bioproject number (11) template file for genbank (12) optional -keep_known mode, can be left blank if you don't want this
+If you don't have the SRA info for some samples, just put in space holder words for these options.
+If, for some options, you use phrases with spaces (such as isolation source) put the option in quotes like: "ocean water"
+Another thing, if you use any of the options other than -default, and your fasta headers are longer than 20 characters, they will be trimmed to only keep the last 17 characters. 
+Here's an example of a command: bash cenote-taker2.sh -default stool_rca_ps_contigs.fasta stool_dsfe_2ct "macaque stool" 09-Mar-2015 "fecal metagenome" SRR7122341 SRX4043905 SAMN09074565 PRJNA393166
+Also, I use 56 GB of memory and 56 threads on the cloud server for each run.
+Make a GenBank submission template file here: https://submit.ncbi.nlm.nih.gov/genbank/template/submission/
 ### **Part 1: Contig processing**
 _-default option_
 (1) The specified .fasta file will be parsed to remove sequences less than 1000 nts.
