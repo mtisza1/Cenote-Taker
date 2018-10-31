@@ -21,7 +21,9 @@ Note that 11 (or 12 if using '-keep_known') options are required. They must all 
 If you don't have the SRA info for some samples, just put in space holder words for these options.
 If, for some options, you use phrases with spaces (such as isolation source) put the option in quotes like: "ocean water"
 If you use any of the options other than -default, and your fasta headers are longer than 20 characters, they will be trimmed to only keep the last 17 characters. 
+
 Here's an example of a command: 
+
 bash cenote-taker1.sh -default stool_rca_ps_contigs.fasta stool_dsfe_2ct "macaque stool" 09-Mar-2015 "fecal metagenome" SRR7122341 SRX4043905 SAMN09074565 PRJNA393166 template1.sbt
 
 Also, I use 56 GB of memory and 56 CPUs on a cloud server for each run.
