@@ -2,7 +2,7 @@
 
 ### This will only work in a Linux enviroment, I believe
 
-# This is Cenote-Taker for Biowulf
+# This is Cenote-Taker set up for NIH Biowulf
 # This version requires nucleotide fasta file of contigs (ideally from SPAdes with '--plasmid' option) as input. 
 
 
@@ -19,13 +19,12 @@ echo "000000000$(tput setaf 4)^^^^^^^^$(tput setaf 2)000000000"
 echo "00000000000000000000000000"
 echo "00000000000000000000000000$(tput sgr 0)"
 
-# Loading all the modules and environments for biowulf
-### Regarding all the lines in this section: I don't know how your cloud server works but all these commands are specific to the NIH Biowulf system.
+# Loading all the modules and environments
 ### 'source' and 'conda' commands are to open a python3 environment (as opposed to default python2 environment). Python3 is required for circlator.
 
 source /data/tiszamj/conda/etc/profile.d/conda.sh
 conda activate cenote_taker1
-### find and install all of the following tools to your path.
+### find and install all of the following tools to your path. Comment out all 'module load' lines as they only do something on the server I use at NIH.
 ### Here is the link to the 'edirect' tool: ftp://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/
 
 module load samtools || echo "$(tput setaf 4)unable to load samtools module $(tput sgr 0)"
