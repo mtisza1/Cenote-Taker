@@ -1,6 +1,6 @@
 ### _Cenote-Taker Overview_
 
-***** Before attempting to use Cenote-Taker, know that this is a work in progress. While it works great for me, it will likely be very difficult to port it to your server based on the code as is. If you are in dire need of Cenote-Taker, please contact Mike. *****
+***** Before attempting set up Cenote-Taker, know that this is a work in progress. While it works great for me, it will likely be very difficult to port it to your server based on the code as is. If you are in dire need of Cenote-Taker, please contact Mike. *****
 
 Few of the complete viral genomes assembled from metagenomic deep sequencing reads have been deposited on NCBI's GenBank database, contributing to a lack of viral reference genomes available to the scientific community for analysis and comparison.  The primary reasons for not depositing genomes include challenges in gene annotation, dealing with file format conversions, and determining which contigs represent complete genomes. Relatedly, the arduousness in manually curating maps of Open Reading Frames (ORFs) in novel viral genomes and contigs hinders analysis.
 
@@ -21,8 +21,9 @@ Note that 11 (or 12 if using '-keep_known') options are required. They must all 
 If you don't have the SRA info for some samples, just put in space holder words for these options.
 If, for some options, you use phrases with spaces (such as isolation source) put the option in quotes like: "ocean water"
 Another thing, if you use any of the options other than -default, and your fasta headers are longer than 20 characters, they will be trimmed to only keep the last 17 characters. 
-Here's an example of a command: bash cenote-taker2.sh -default stool_rca_ps_contigs.fasta stool_dsfe_2ct "macaque stool" 09-Mar-2015 "fecal metagenome" SRR7122341 SRX4043905 SAMN09074565 PRJNA393166
-Also, I use 56 GB of memory and 56 threads on the cloud server for each run.
+Here's an example of a command: 
+bash cenote-taker1.sh -default stool_rca_ps_contigs.fasta stool_dsfe_2ct "macaque stool" 09-Mar-2015 "fecal metagenome" SRR7122341 SRX4043905 SAMN09074565 PRJNA393166
+Also, I use 56 GB of memory and 56 CPUs on a cloud server for each run.
 Make a GenBank submission template file here: https://submit.ncbi.nlm.nih.gov/genbank/template/submission/
 ### **Part 1: Contig processing**
 _-default option_
