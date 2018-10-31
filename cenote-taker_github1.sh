@@ -201,8 +201,8 @@ elif [[ $1 = "-default" ]]; then
 		bioawk -v run_var="$run_title" -c fastx '{ if(length($seq) > 1000) { print ">"run_var NR" "$name; print $seq }}' $original_spades_contigs > ${original_spades_contigs%.fasta}.over_1000.fasta ;
 		cd $run_title
 ### You'll need 'last' from: http://last.cbrc.jp/ 
-### go into the apc_biowulf1.pl script and change the path to lastal and lastdb
-		perl /data/tiszamj/mike_tisza/auto_annotation_pipeline/apc_biowulf1.pl -b $run_title ../${original_spades_contigs%.fasta}.over_1000.fasta ;
+### go into the apc_ct1.pl script and change the path to lastal and lastdb
+		perl /data/tiszamj/mike_tisza/auto_annotation_pipeline/apc_ct1.pl -b $run_title ../${original_spades_contigs%.fasta}.over_1000.fasta ;
 		rm apc_aln*
 		for permu_file in permuted.*.fa ; do 
 			mv $permu_file "$run_title"${permu_file#permuted.} ; 
@@ -407,7 +407,7 @@ done
 
 # Generating tbl file from RPS-BLAST results
 ### set path to this perl script. 
-perl /data/tiszamj/mike_tisza/auto_annotation_pipeline/rpsblastreport2tbl_mt_annotation_pipe_biowulf.pl ;
+perl /data/tiszamj/mike_tisza/auto_annotation_pipeline/rpsblastreport2tbl_ct1.pl ;
 
 for nucl_fa in $novel_fastas ; do 
 if [ -s "${nucl_fa%.fasta}.NT.tbl" ]; then
@@ -439,7 +439,7 @@ done
 
 # Generating tbl file from BLASTP results
 ### set path to this perl script. 
-perl /data/tiszamj/mike_tisza/auto_annotation_pipeline/blastpreport2tbl_mt_annotation_pipe_biowulf2.pl ;
+perl /data/tiszamj/mike_tisza/auto_annotation_pipeline/blastpreport2tbl_ct1.pl ;
 
 for feat_tbl1 in *.NT.tbl ; do
 if [ -s "${feat_tbl1%.NT.tbl}.BLASTP.tbl" ]; then
@@ -472,7 +472,7 @@ rm *.rotate.AA.fasta
 
 # Generating tbl file from HHBlits results
 ### set path to this perl script. 
-perl /data/tiszamj/mike_tisza/auto_annotation_pipeline/hhpredreport2tbl_mt_annotation_pipe_biowulf1_gjs_edits.pl ;
+perl /data/tiszamj/mike_tisza/auto_annotation_pipeline/hhpredreport2tbl_ct1.pl ;
 
 for HH_tbl1 in *.HH.tbl ; do 
 sed 's/OS=.*//g; s/ ;//g; s/UniProtKB:>\([0-9][A-Z].*\)/PDB:\1/g; s/UniProtKB:>tr|.*|\(.\)/UniProtKB:\1/g; s/UniProtKB:>\([a-z].*\)/Scop:\1/g; s/UniProtKB:>\(PF.*\)/PFAM:\1/g; s/ is .*//g; s/ are .*//g' $HH_tbl1 > ${HH_tbl1%.HH.tbl}.HH2.tbl
