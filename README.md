@@ -32,6 +32,7 @@ Make a GenBank submission template file here: https://submit.ncbi.nlm.nih.gov/ge
 
 ### **Part 1: Contig processing**
 _-default option_
+
 (1) The specified .fasta file will be parsed to remove sequences less than 1000 nts.
 
 (2) Sequences will be scanned for terminally redundant ends (circular sequences) and only sequences that are determined to be circular will be kept.
@@ -43,9 +44,11 @@ _-default option_
 (5) Uses Circlator ([](https://github.com/sanger-pathogens/circlator)) to rotate circular contigs so that a non-intragenic start codon of one of the ORFs will be the wrap point.
 
 _-needs_rotation option_
+
 (1) The specified .fasta file of pre-wrapped circular contigs will be used for Circlator (https://github.com/sanger-pathogens/circlator) to rotate circular contigs so that a non-intragenic start codon of one of the ORFs will be the wrap point.
 
 _-given_linear or -given_circular options_
+
 (1) given .fasta file will be kept more or less as is for annotation
 
 ### **Part 2: ORF Annotation and Taxonomy Guessing**
