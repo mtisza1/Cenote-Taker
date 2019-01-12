@@ -66,7 +66,7 @@ if  [[ $1 = "-given_circular" ]] ||  [[ $1 = "-given_linear" ]]; then
     if [ ${original_spades_contigs: -6} == ".fasta" ]; then
 		echo "$(tput setaf 5)File with .fasta extension detected.$(tput sgr 0)"
 ### install bioawk
-		bioawk -v run_var="$run_title" -c fastx '{ print ">"$name" "run_var NR; print $seq }' $original_spades_contigs > ${original_spades_contigs%.fasta}.rename.fasta ;
+		bioawk -v run_var="$run_title" -c fastx '{ print ">"run_var NR" "$name; print $seq }' $original_spades_contigs > ${original_spades_contigs%.fasta}.rename.fasta ;
 		cd $run_title
 ### csplit may or may not be in your path already,
 		csplit -z ../${original_spades_contigs%.fasta}.rename.fasta '/>/' '{*}' --prefix=temp. --suffix-format=%03d.fasta;
@@ -110,7 +110,7 @@ elif [[ $1 = "-needs_rotation" ]]; then
 # splitting and renaming given contigs as fasta header ("ct_" + last 16 characters)
     if [ ${original_spades_contigs: -6} == ".fasta" ]; then
 		echo "$(tput setaf 5)File with .fasta extension detected.$(tput sgr 0)"
-		bioawk -v run_var="$run_title" -c fastx '{ print ">"$name" "run_var NR; print $seq }' $original_spades_contigs > ${original_spades_contigs%.fasta}.rename.fasta ;
+		bioawk -v run_var="$run_title" -c fastx '{ print ">"run_var NR" "$name; print $seq }' $original_spades_contigs > ${original_spades_contigs%.fasta}.rename.fasta ;
 		cd $run_title
 		csplit -z ../${original_spades_contigs%.fasta}.rename.fasta '/>/' '{*}' --prefix=temp. --suffix-format=%03d.fasta;
 	else
