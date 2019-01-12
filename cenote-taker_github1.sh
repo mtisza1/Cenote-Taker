@@ -774,7 +774,7 @@ if  [[ $1 = "-given_circular" ]] ||  [[ $1 = "-given_linear" ]] ||  [[ $1 = "-ne
 	for fsa_file in sequin_directory/*.fsa ; do
 		fsa_name2=$( echo ${fsa_file#sequin_directory/} ) ; 
 		fsa_name3=$( echo ${fsa_name2%.fsa} | sed 's/.PLASMID//g' )
-		seq_name1=$( head -n1 $fsa_name3.fasta | sed 's/>//g; s/|.*//g' | cut -d " " -f1 )
+		seq_name1=$( head -n1 $fsa_name3.fasta | sed 's/>//g; s/|.*//g' | cut -d " " -f2 )
 		sed " 1 s/note= closest relative/note= $seq_name1 ; closest relative/" $fsa_file > $fsa_file.temp
 		mv $fsa_file.temp $fsa_file
 	done
