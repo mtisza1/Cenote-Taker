@@ -24,7 +24,7 @@ echo "00000000000000000000000000$(tput sgr 0)"
 
 source /data/tiszamj/conda/etc/profile.d/conda.sh
 conda activate cenote_taker1
-### find and install all of the following tools to your path. Comment out all 'module load' lines as they only do something on the server I use at NIH.
+### find and install all of the following tools to your path proceding 'module load' on the following lines. Comment out all 'module load' lines as they only do something on the server I use at NIH.
 ### Here is the link to the 'edirect' tool: ftp://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/
 
 module load samtools || echo "$(tput setaf 4)unable to load samtools module $(tput sgr 0)"
@@ -201,7 +201,7 @@ elif [[ $1 = "-default" ]]; then
 		bioawk -v run_var="$run_title" -c fastx '{ if(length($seq) > 1000) { print ">"run_var NR" "$name; print $seq }}' $original_spades_contigs > ${original_spades_contigs%.fasta}.over_1000.fasta ;
 		cd $run_title
 ### You'll need 'last' from: http://last.cbrc.jp/ 
-### go into the apc_ct1.pl script and change the path to lastal and lastdb
+### go into the apc_ct1.pl script and change the path to lastal and lastdb. Then, change the path to this .pl script on the following line.
 		perl /data/tiszamj/mike_tisza/auto_annotation_pipeline/apc_ct1.pl -b $run_title ../${original_spades_contigs%.fasta}.over_1000.fasta ;
 		rm apc_aln*
 		for permu_file in permuted.*.fa ; do 
@@ -245,7 +245,7 @@ elif [[ $1 = "-default" ]]; then
 	if  [[ ${12} = "-keep_known" ]]; then
 		echo " -keep_known option used. Not searching for or disregarding known sequences"
 	else
-### install the blast suite and download and format the 'nt' database from genbank.
+### install the blast suite and download and format the 'nt' database from genbank. Set correct path.
 		blastn -db /fdb/blastdb/nt -query $circle -evalue 1e-50 -num_threads 56 -outfmt "6 qseqid sseqid stitle pident length" -qcov_hsp_perc 50 -num_alignments 3 -out ${circle%.fasta}.blastn.out ;
 		if [ -s "${circle%.fasta}.blastn.out" ]; then
 			sed 's/ /-/g' ${circle%.fasta}.blastn.out | awk '{if ($4 > 90) print}' | awk '{if ($5 > 500) print}' > ${circle%.fasta}.blastn.notnew.out ;
@@ -344,8 +344,8 @@ fi
 for nucl_fa in $novel_fastas ; do
 if [ -s "${nucl_fa%.fasta}.rotate.fasta" ]; then
 	echo "$(tput setaf 5)Guessing taxonomy for sequence "${nucl_fa%.fasta}.rotate.fasta" by BLASTX against virus and plasmid protein database.$(tput sgr 0)"
-### I have a custom-ish database of viral and plasmid proteins. The viral proteins are directly taken from refseq. The plasmid proteins were pulled out of the 'nr' bacterial database by me. I will send this database. 
-### You may choose to use a slightly different database, but for this step, don't use a database of viruses you've annotated because downstream parts of cenote-taker need the genbank taxonomy info.
+### I have a custom-ish database of viral and plasmid proteins. The viral proteins are directly taken from refseq. The plasmid proteins were pulled out of the 'nr' bacterial protein database if the protein contained "(plasmid)" in the .fasta header.
+### You may choose to use a slightly different database, but for this step, only use proteins from GenBank because downstream parts of cenote-taker need the GenBank taxonomy info.
 	blastx -evalue 1e-4 -outfmt "6 qseqid stitle pident evalue length" -num_threads 56 -num_alignments 1 -db /data/tiszamj/mike_tisza/auto_annotation_pipeline/blast_DBs/virus_and_plasmid_proteins -query ${nucl_fa%.fasta}.rotate.fasta -out ${nucl_fa%.fasta}.tax_guide.blastx.out ;
 	if [ ! -s "${nucl_fa%.fasta}.tax_guide.blastx.out" ]; then
 		echo "No homologues found" > ${nucl_fa%.fasta}.tax_guide.blastx.out ;
@@ -354,7 +354,7 @@ if [ -s "${nucl_fa%.fasta}.rotate.fasta" ]; then
 ### ktClassifyBLAST is available when you install kronatools
 		ktClassifyBLAST -o ${nucl_fa%.fasta}.tax_guide.blastx.tab ${nucl_fa%.fasta}.tax_guide.blastx.out
 		taxid=$( tail -n1 ${nucl_fa%.fasta}.tax_guide.blastx.tab | cut -f2 )
-### efetch is from edirect, as is xtract, I believe.
+### efetch and xtract are from edirect.
 		efetch -db taxonomy -id $taxid -format xml | /data/tiszamj/mike_tisza/xtract.Linux -pattern Taxon -element Lineage >> ${nucl_fa%.fasta}.tax_guide.blastx.out
 	fi
 else
@@ -394,6 +394,7 @@ if [ -s "${nucl_fa%.fasta}.rotate.AA.sorted.fasta" ]; then
 
 	echo "$(tput setaf 5)"$nucl_fa" Continuing to RPS-BLAST NCBI CDD domains database for each ORF...$(tput sgr 0)" 
 ### CDD database can be found here: ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd
+### set path for database
 	rpsblast -evalue 1e-4 -num_descriptions 5 -num_threads 56 -line_length 100 -num_alignments 1 -db /data/tiszamj/mike_tisza/auto_annotation_pipeline/cdd_rps_db/Cdd -query ${nucl_fa%.fasta}.rotate.AA.sorted.fasta -out ${nucl_fa%.fasta}.rotate.AA.rpsblast.out ;
 	echo "$(tput setaf 5)RPS-BLAST of "${nucl_fa%.fasta}.rotate.AA.sorted.fasta" complete.$(tput sgr 0)"
 	echo " "
@@ -424,7 +425,7 @@ grep -f ${feat_tbl1%.NT.tbl}.for_hhpred.txt -A1 ${feat_tbl1%.NT.tbl}.rotate.AA.s
 if grep -q "(plasmid)" ${feat_tbl1%.NT.tbl}.tax_guide.blastx.out ; then
 	if [ -s "${feat_tbl1%.NT.tbl}.rotate.rps_nohits.fasta" ]; then
 		echo "$(tput setaf 5)"$nucl_fa" is likely a plasmid... Continuing to BLASTP NCBI nr database for each ORF that had no hits in CDD...$(tput sgr 0)" 
-### I use both the 'nr' and 'nr/viral' databases separately. Available from genbank.
+### This uses both the 'nr' and 'nr/viral' databases separately. Available from genbank.
 		blastp -evalue 1e-4 -num_descriptions 5 -num_threads 56 -num_alignments 1 -db /fdb/blastdb/nr -query ${feat_tbl1%.NT.tbl}.rotate.rps_nohits.fasta -out ${feat_tbl1%.NT.tbl}.rotate.blastp.out ;
 		echo "$(tput setaf 5)BLASTP of "${feat_tbl1%.NT.tbl}.rotate.rps_nohits.fasta" complete.$(tput sgr 0)"
 	fi
