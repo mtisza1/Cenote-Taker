@@ -2,6 +2,8 @@
 
 ***** Before attempting set up Cenote-Taker, know that this is a work in progress. While it works great for me, it will require some modifications to port it to your server based on the code as is. If you want to set it up, please see the comments in the scripts denoted with a triple hash (###) regarding dependencies, etc. If you are unable/unwilling to set it up and are in need of Cenote-Taker, please contact Mike. *****
 
+![alt text](https://github.com/mtisza1/Cenote-Taker/blob/master/cenote_schematicArtboard%201.png)
+
 Few of the complete viral genomes assembled from metagenomic deep sequencing reads have been deposited on NCBI's GenBank database, contributing to a lack of viral reference genomes available to the scientific community for analysis and comparison.  The primary reasons for not depositing genomes include challenges in gene annotation, dealing with file format conversions, and determining which contigs represent complete genomes. Relatedly, the arduousness in manually curating maps of Open Reading Frames (ORFs) in novel viral genomes and contigs hinders analysis. Finally, sequences that are highly divergent from any reference genome present even greater problems in regards to ab initio gene prediction.
 
 Cenote-Taker (a portmanteau of _Cenote_, a naturally occuring circular water pool, and _note-taker_) was designed to overcome the most challenging obstacles in high throughput viral (and plasmid) genome/sequence annotation and facilitation of GenBank deposition of annotated genomes. Cenote-Taker should work for annotation of genomes closely related to extant reference genomes, but is specifically designed for annotation of sequences that are highly divergent from known sequences.
