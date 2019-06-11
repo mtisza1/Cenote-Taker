@@ -1,6 +1,6 @@
 ### _Cenote-Taker Overview_
 
-***** Before attempting set up Cenote-Taker, know that this is a work in progress. While it works great for me, it will require some modifications to port it to your server based on the code as is. If you want to set it up, please see the comments in the scripts denoted with a triple hash (###) regarding dependencies, etc. If you are unable/unwilling to set it up and are in need of Cenote-Taker, please contact Mike. *****
+***** Before attempting set up Cenote-Taker, know that the easiest way to use it is through CyVerse: http://www.cyverse.org/discovery-environment. There you can use Cenote-Taker for free and without knowledge of command-line interface while leveraging a high performance computing cluster. The code here will require some modifications to port it to your server. If you want to set it up, please see the comments in the scripts denoted with a triple hash (###) regarding dependencies, etc.  *****
 
 ![alt text](https://github.com/mtisza1/Cenote-Taker/blob/master/cenote_schematicArtboard%201.png)
 
