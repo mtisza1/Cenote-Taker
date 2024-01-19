@@ -1,6 +1,27 @@
-### _Cenote-Taker Overview_
+### _DEPRECATED_
 
-[I strongly recommend that you use Cenote-Taker2](https://github.com/mtisza1/Cenote-Taker2). Or use [Cyverse](http://www.cyverse.org/discovery-environment)
+This repo is deprecated.
+
+[Please use Cenote-Taker 3](https://github.com/mtisza1/Cenote-Taker3). It's great!!
+
+
+
+######### ######### ######### ######### ######### ######### ######### ######### #########
+
+######### ######### ######### ######### ######### ######### ######### ######### #########
+
+######### ######### ######### ######### ######### ######### ######### ######### #########
+
+######### ######### ######### ######### ######### ######### ######### ######### #########
+
+######### ######### ######### ######### ######### ######### ######### ######### #########
+
+######### ######### ######### ######### ######### ######### ######### ######### #########
+
+######### ######### ######### ######### ######### ######### ######### ######### #########
+
+######### ######### ######### ######### ######### ######### ######### ######### #########
+
 
 ***** Before attempting set up Cenote-Taker, know that the easiest way to use it is through CyVerse: http://www.cyverse.org/discovery-environment. There you can use Cenote-Taker for free and without knowledge of command-line interface while leveraging a high performance computing cluster. The code here will require some modifications to port it to your server. If you want to set it up, please see the comments in the scripts denoted with a triple hash (###) regarding dependencies, etc.  *****
 
